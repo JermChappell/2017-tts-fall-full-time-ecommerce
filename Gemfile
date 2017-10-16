@@ -62,6 +62,12 @@ group :development, :test do
   gem 'selenium-webdriver'
 end
 
+# GET PAID!!!!!!*****
+  gem 'stripe', :git => 'http://github.com/stripe/stripe-ruby'
+  
+  # secrets
+  gem 'figaro'
+
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
