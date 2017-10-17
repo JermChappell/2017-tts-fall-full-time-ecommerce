@@ -2,8 +2,14 @@ class CartController < ApplicationController
   before_action :authenticate_user!, except: [:add_to_cart, :view_order]
 
   def add_to_cart
-    line_item = LineItem.create(product_id: params[:product_id], quantity: params[:quantity])
-    line_item.update(line_item_total: (line_item.quantity * line_item.product.price))
+    @order = current_order
+    
+    line_item = @order.line_items.new(product_id params[:product_id], quantity: params[:quantity])
+    @order.save
+    session[:order_id] = @order.id 
+    
+    line_item.update(line_item_total: (line_item.product.price * line_item.quantity))
+    
     redirect_back(fallback_location: root_path)
   end
 
